@@ -2,3 +2,4 @@
 # tasks file for simple-logging-server
 - include_tasks prereqs.yml
 - include_tasks install_elastic.yml
+- include_tasks kibana.yml

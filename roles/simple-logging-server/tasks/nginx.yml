@@ -19,9 +19,9 @@
   template:
     src: kibana.conf.j2
     dest: /etc/nginx/conf.d/kibana.conf
-    owner: nginx
-    group: nginx
-    mode: 0660
+    owner: root
+    group: root
+    mode: 0755
 
 - name: Create user and password protection for Nginx
   htpasswd:
@@ -29,8 +29,8 @@
     name: admin
     password: "{{ web_password }}"
     owner: root
-    group: nginx
-    mode: 0640
+    group: root
+    mode: 0755
 
 #Start and Nginx the service
 - name: Start the service

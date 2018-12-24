@@ -18,6 +18,7 @@
 - name: Check if -XX:+AssumeMP is on file
   shell: grep "XX:+AssumeMP" /etc/elasticsearch/jvm.options
   register: javaoptions
+  ignore_errors: yes
 
 - name: Add -XX:+AssumeMP to /etc/elasticsearch/jvm.options
   lineinfile:

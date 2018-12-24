@@ -1,0 +1,8 @@
+---
+- name: Install Server side Simple Logging
+  become: yes
+  become_method: sudo
+  hosts: logging_server
+
+  roles:
+    - simple-logging-server

@@ -1,7 +1,6 @@
 ---
 - name: Install Server side Simple Logging
   become: yes
-  become_method: sudo
   hosts: "{{ target_hosts | default('all') }}"
   roles:
-     - simple-logging-server
+    - simple-logging-server

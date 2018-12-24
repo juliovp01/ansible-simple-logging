@@ -14,6 +14,18 @@
     group: elasticsearch
     mode: 0660
 
+#Fix Java Config
+- name: Check if -XX:+AssumeMP is on file
+  shell: grep "^XX:+AssumeMP" /etc/elasticsearch/jvm.options
+  register: javaoptions
+
+- name: Add -XX:+AssumeMP to /etc/elasticsearch/jvm.options
+  lineinfile:
+    path: /etc/elasticsearch/jvm.options
+    line: '-XX:+AssumeMP'
+
+  when: javaoptions.stdout != "" 
+
 #Start and enable the service
 - name: Start the service
   service:

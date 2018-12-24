@@ -1,0 +1,18 @@
+---
+#Install Java 8
+- name: Install Java 8
+  package:
+    name: "{{ java_package }}"
+    state: present
+
+#Add ELasticSearch GPG Key and Repositories
+- name: Add GPG Signature for the Elasticsearch software.
+  rpm_key:
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add ElasticSearch repository.
+  template:
+    src: elastic.repo.j2
+    dest: /etc/yum.repos.d/elastic.repo
+    mode: 0644

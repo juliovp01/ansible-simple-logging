@@ -1,2 +1,11 @@
 ---
 # vars file for simple-logging-server
+java_package: java-1.8.0-openjdk
+elastic_version: '6.x'
+elastic_package_state: present
+cluster_name: simple_logging
+#Path Data usually goes to: /var/lib/elasticsearch
+path_data: /DATABANK/log_aggregation
+path_logs: /var/log/elasticsearch
+ip_address_to_bind: 192.168.1.10
+elastic_port: 9200

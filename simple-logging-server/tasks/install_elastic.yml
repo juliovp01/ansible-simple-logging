@@ -1,0 +1,22 @@
+---
+#Install Elastic
+- name: Install ElasticSearch.
+  package:
+    name: elasticsearch
+    state: present
+
+#Configure Elastic
+- name: Copy template to /etc/elasticsearch/elasticsearch.yml
+  template:
+    src: elastic.yml.j2
+    dest: /etc/elasticsearch/elasticsearch.yml
+    owner: root
+    group: elasticsearch
+    mode: 0660
+
+#Start and enable the service
+- name: Start the service
+  service:
+    name: elasticsearch
+    state: started
+    enabled: true

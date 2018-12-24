@@ -4,3 +4,5 @@ path.logs: {{ path_logs }}
 network.host: {{ ip_address_to_bind }}
 http.port: {{ elastic_port }}
 node.name: {{ node_name }}
+index.number_of_shards: 1
+index.number_of_replicas: 0

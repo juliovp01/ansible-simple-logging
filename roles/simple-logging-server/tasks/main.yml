@@ -3,3 +3,4 @@
 - include_tasks prereqs.yml
 - include_tasks install_elastic.yml
 - include_tasks kibana.yml
+- include_tasks nginx.yml

@@ -12,6 +12,7 @@
   loop:
     - nginx
     - httpd-tools
+    - python-passlib
 
 #Deploy config template for Nginx
 - name: Copy template to /etc/elasticsearch/elasticsearch.yml

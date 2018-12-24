@@ -1,0 +1,40 @@
+---
+#Install and configure Nginx to serve Kibana as a reverse proxy
+- name: Install EPEL repositories
+  package:
+    name: epel-release
+    state: present
+
+#Install Nginx
+- name: Install Nginx
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nginx
+    - httpd-tools
+
+#Deploy config template for Nginx
+- name: Copy template to /etc/elasticsearch/elasticsearch.yml
+  template:
+    src: kibana.conf.j2
+    dest: /etc/nginx/conf.d/kibana.conf
+    owner: nginx
+    group: nginx
+    mode: 0660
+
+- name: Create user and password protection for Nginx
+  htpasswd:
+    path: /etc/nginx/.kibana-user
+    name: admin
+    password: {{ web_password }}
+    owner: root
+    group: nginx
+    mode: 0640
+
+#Start and Nginx the service
+- name: Start the service
+  service:
+    name: nginx
+    state: started
+    enabled: true

@@ -1,12 +1,11 @@
 ---
-#Install Kibana Dashboard
 - name: Install Kibana
   package:
     name: kibana
     state: present
 
-- name: Enable and start the Kibana Service
-   service:
+- name: Start the service
+  service:
     name: kibana
     state: started
     enabled: true

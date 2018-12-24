@@ -1,5 +1,4 @@
 ---
-#Install and configure Nginx to serve Kibana as a reverse proxy
 - name: Install EPEL repositories
   package:
     name: epel-release
@@ -27,7 +26,7 @@
   htpasswd:
     path: /etc/nginx/.kibana-user
     name: admin
-    password: {{ web_password }}
+    password: "{{ web_password }}"
     owner: root
     group: nginx
     mode: 0640
@@ -38,3 +37,13 @@
     name: nginx
     state: started
     enabled: true
+
+#Opening Ports
+- name: Opening ports for Nginx
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - http
+    - https

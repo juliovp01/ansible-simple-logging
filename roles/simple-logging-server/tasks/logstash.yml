@@ -1,0 +1,24 @@
+---
+#Install LogStash
+- name: Install LogStash
+  package:
+    name: logstash
+    state: present
+
+#Deploy input file for LogStash
+- name: Deploy input file for LogStash
+  template:
+    src: 02-beats-input.conf.j2
+    dest: /etc/logstash/conf.d/02-beats-input.conf
+
+#Deploy Filter file
+- name: Deploy filter file for LogStash
+  template:
+    src: 10-syslog-filter.conf.j2
+    dest: /etc/logstash/conf.d/10-syslog-filter.conf
+
+#Deploy Output file
+- name: Deploy output file for LogStash
+  template:
+    src: 30-elasticsearch-output.conf.j2
+    dest: /etc/logstash/conf.d/30-elasticsearch-output.conf

@@ -4,3 +4,31 @@
   package:
     name: filebeat
     state: present
+  
+- name: Create directory for files
+  file:
+    path: /tmp/filebeat
+    state: directory
+
+- name: Download beat dashboards
+  get_url:
+    url: https://download.elastic.co/beats/dashboards/beats-dashboards-1.1.0.zip
+    dest: /tmp/filebeat/beats-dashboards-1.1.0.zip
+    mode: 0755
+
+- name: Uncompress files
+  unarchive:
+    src: /tmp/filebeat/beats-dashboards-1.1.0.zip
+    dest: /tmp/filebeat
+
+- name: Load dashboards
+  shell: sh /tmp/filebeat/beats-dashboards-1.1.0/load.sh
+
+- name: Download filebeat index template
+  get_url:
+    url: https://gist.githubusercontent.com/thisismitch/3429023e8438cc25b86c/raw/d8c479e2a1adcea8b1fe86570e42abab0f10f364/filebeat-index-template.json
+    dest: /tmp/filebeat/filebeat-index-template.json
+    mode: 0755
+
+- name: Post filebeat-index-template
+  shell: curl -XPUT 'http://localhost:9200/_template/filebeat?pretty' -d@/tmp/filebeat/filebeat-index-template.json

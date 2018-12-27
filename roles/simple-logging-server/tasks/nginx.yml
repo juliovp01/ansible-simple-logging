@@ -33,13 +33,13 @@
     mode: 0644
 
 #Deploy config template for Nginx
-- name: Copy template to /etc/elasticsearch/elasticsearch.yml
+- name: Copy the Kibana config for Nginx
   template:
     src: kibana.conf.j2
     dest: /etc/nginx/conf.d/kibana.conf
     owner: root
     group: root
-    mode: 0755
+    mode: 0644
 
 
 #Start and Nginx the service

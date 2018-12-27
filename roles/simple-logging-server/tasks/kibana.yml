@@ -4,6 +4,14 @@
     name: kibana
     state: present
 
+- name: Copy Config File
+  template:
+    src: kibana.yml.j2
+    dest: /opt/kibana/config/kibana.yml
+    owner: root
+    group: root
+    mode: 0664
+
 - name: Start the service
   service:
     name: kibana

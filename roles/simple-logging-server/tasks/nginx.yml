@@ -14,6 +14,24 @@
     - httpd-tools
     - python-passlib
 
+- name: Create user and password protection for Nginx
+  htpasswd:
+    path: /etc/nginx/htpasswd.users
+    name: admin
+    password: "{{ web_password }}"
+    owner: root
+    group: root
+    mode: 0644
+
+#Deploy config template for Nginx
+- name: Copy Nginx Conf 
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+
 #Deploy config template for Nginx
 - name: Copy template to /etc/elasticsearch/elasticsearch.yml
   template:
@@ -23,14 +41,6 @@
     group: root
     mode: 0755
 
-- name: Create user and password protection for Nginx
-  htpasswd:
-    path: /etc/nginx/.kibana-user
-    name: admin
-    password: "{{ web_password }}"
-    owner: root
-    group: root
-    mode: 0755
 
 #Start and Nginx the service
 - name: Start the service

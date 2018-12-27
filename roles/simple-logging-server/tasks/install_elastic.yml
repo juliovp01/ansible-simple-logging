@@ -12,7 +12,7 @@
     dest: /etc/elasticsearch/elasticsearch.yml
     owner: root
     group: elasticsearch
-    mode: 0660
+    mode: 0750
 
 #Fix Java Config
 - name: Check if -XX:+AssumeMP is on file

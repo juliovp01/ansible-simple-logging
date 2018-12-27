@@ -16,3 +16,9 @@
     src: elastic.repo.j2
     dest: /etc/yum.repos.d/elastic.repo
     mode: 0644
+
+- name: Add Kibana repository.
+  template:
+    src: kibana.repo.j2
+    dest: /etc/yum.repos.d/kibana.repo
+    mode: 0644
